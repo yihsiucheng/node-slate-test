@@ -135,7 +135,7 @@ html, body {
          }
       }
    .tocify-item>a, .toc-footer li {
-      padding: 0 $nav-padding 0 $nav-padding;
+      padding: 0px $nav-padding 0px $nav-padding;
       display: block;
       overflow-x: hidden;
       white-space: nowrap;
@@ -146,8 +146,8 @@ html, body {
    // styling of an unordered list because it is ugly.
    ul, li {
       list-style: none;
-      margin: 0;
-      padding: 0;
+      margin: 0px;
+      padding: 0px;
       line-height: 28px;
       }
    li {
@@ -176,7 +176,7 @@ html, body {
          }
       }
    .toc-footer {
-      padding: 1em 0;
+      padding: 1em 0px;
       margin-top: 1em;
       border-top: 1px dashed $nav-footer-border-color;
       li,a {
@@ -207,11 +207,11 @@ html, body {
       transform: rotate(-90deg) translate(-100%, 0);
       border-radius: 0 0 0 5px;
       }
-   padding: 0 1.5em 5em 0; // increase touch size area
+   padding: 0px 1.5em 5em 0px;  //increase touch size area
    display: none;
    position: fixed;
-   top: 0;
-   left: 0;
+   top: 0px;
+   left: 0px;
    z-index: 100;
    color: black;
    text-decoration: none;
@@ -237,7 +237,7 @@ html, body {
    z-index: 10;
    background-color: $main-bg;
    min-height: 100%;
-   padding-bottom: 1px; // prevent margin overflow
+   padding-bottom: 1px;  //prevent margin overflow
    // The dark box is what gives the code samples their dark background.
    // It sits essentially under the actual content block, which has a
    // transparent background.
@@ -292,7 +292,7 @@ html, body {
 // This is all the stuff with the light background in the left half of the page
 
 .content {
-   // to place content above the dark box
+   // Place content above the dark box
    position: relative;
    z-index: 30;
    &::after {
@@ -326,8 +326,8 @@ html, body {
       background-image: linear-gradient(to bottom, #fff, #f9f9f9);
       }
    h1:first-child, div:first-child + h1 {
-      border-top-width: 0;
-      margin-top: 0;
+      border-top-width: 0px;
+      margin-top: 0px;
       }
    h2 {
       @extend %header-font;
@@ -450,16 +450,15 @@ html, body {
 
 .content {
    pre, blockquote {
+      @extend %right-col;
       background-color: $code-bg;
       color: white;
-      padding: 2em $main-padding;
       margin: 0px;
       width: $examples-width;
-      float:right;
-      clear:right;
+      float: right;
+      clear: right;
       box-sizing: border-box;
       text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.4);
-      @extend %right-col;
       &>p { margin: 0px; }
       a {
          color: white;
@@ -469,12 +468,14 @@ html, body {
       }
    pre {
       @extend %code-font;
+      padding: 2em $main-padding;
       }
    blockquote {
+      padding: 0px;
       &>p {
          background-color: $code-annotation-bg;
          border-radius: 5px;
-         padding: $code-annotation-padding;
+         padding: $code-annotation-padding $main-padding;
          color: lightgray;
          border-top: 1px solid black;
          border-bottom: 1px solid #404040;
