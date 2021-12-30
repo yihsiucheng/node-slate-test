@@ -91,7 +91,7 @@ const task = {
          .pipe(jsHint.reporter());
       },
    buildFonts: () => {
-      return gulp.src('source/fonts/**/*')
+      return gulp.src('source/fonts/**/*.+(ttf|woff|woff2)')
          .pipe(gulp.dest('build/fonts'));
       },
    buildImages: () => {

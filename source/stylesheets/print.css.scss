@@ -108,20 +108,13 @@ body {
       text-transform: uppercase;
       }
    aside {
+      @extend %icon-info-sign;
       padding: 1em;
       border: 1px solid $print-color-light;
       border-radius: 5px;
       margin-top: 1.5em;
       margin-bottom: 1.5em;
       line-height: 1.6;
-      }
-   aside::before {
-      vertical-align: middle;
-      padding-right: 0.5em;
-      font-size: 14px;
-      &.notice {
-         @extend %icon-info-sign;
-         }
       &.success {
          @extend %icon-ok-sign;
          }

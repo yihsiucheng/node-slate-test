@@ -410,6 +410,7 @@ html, body {
       padding: 0;
       }
    aside {
+      @extend %icon-info-sign;
       padding-top: 1em;
       padding-bottom: 1em;
       text-shadow: 0 1px 0 lighten($aside-notice-bg, 15%);
@@ -418,33 +419,19 @@ html, body {
       background: $aside-notice-bg;
       line-height: 1.6;
       &.success {
+         @extend %icon-ok-sign;
          background-color: $aside-success-bg;
          text-shadow: 0 1px 0 lighten($aside-success-bg, 15%);
          }
       &.warning {
+         @extend %icon-exclamation-sign;
          background-color: $aside-warning-bg;
          text-shadow: 0 1px 0 lighten($aside-warning-bg, 15%);
          }
       &.error {
+         @extend %icon-exclamation-sign;
          background-color: $aside-error-bg;
          text-shadow: 0 1px 0 lighten($aside-error-bg, 15%);
-         }
-      }
-   aside::before {
-      vertical-align: middle;
-      padding-right: 0.5em;
-      font-size: 14px;
-      &.notice {
-         @extend %icon-info-sign;
-         }
-      &.success {
-         @extend %icon-ok-sign;
-         }
-      &.warning {
-         @extend %icon-exclamation-sign;
-         }
-      &.error {
-         @extend %icon-exclamation-sign;
          }
       }
    .search-highlight {
