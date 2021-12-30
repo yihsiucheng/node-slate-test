@@ -37,18 +37,18 @@ const jsFiles = {
    libs: [
       'node_modules/jquery/dist/jquery.js',
       'node_modules/jquery-ui-dist/jquery-ui.js', //not ideal: https://stackoverflow.com/q/34219046
-      'source/javascripts/lib/_jquery.tocify.js',
+      'source/js/lib/_jquery.tocify.js',
       'node_modules/tocbot/dist/tocbot.js',  //see: https://github.com/center-key/node-slate/issues/8
       'node_modules/imagesloaded/imagesloaded.pkgd.js',
       ],
    scripts: [
-      'source/javascripts/app/_lang.js',
-      'source/javascripts/app/_toc.js',
+      'source/js/app/_lang.js',
+      'source/js/app/_toc.js',
       ],
    search: [
       'node_modules/fuse.js/dist/fuse.js',
       'node_modules/jquery-highlight/jquery.highlight.js',
-      'source/javascripts/app/_search.js',
+      'source/js/app/_search.js',
       ],
    };
 
@@ -74,7 +74,7 @@ const getPageData = () => {
       image_tag: (filename) =>
          `<img alt=${code(filename)} class=image-${code(filename)} src=images/${filename}>`,
       javascript_include_tag: (name) =>
-         `<script src=javascripts/${name}.js></script>\n`,
+         `<script src=js/${name}.js></script>\n`,
       stylesheet_link_tag: (name, media) =>
          `<link href=stylesheets/${name}.css rel=stylesheet media=${media}>`,
       langs: (config.language_tabs || []).map(
@@ -103,7 +103,7 @@ const task = {
       return gulp.src(jsFiles.libs.concat(config.search ? jsFiles.search : [], jsFiles.scripts))
          .pipe(concat('all.js'))
          .pipe(gulpIf(settings.compress, uglify()))
-         .pipe(gulp.dest('build/javascripts'));
+         .pipe(gulp.dest('build/js'));
       },
    buildCss: () => {
       return gulp.src('source/stylesheets/*.css.scss')
@@ -144,7 +144,7 @@ const task = {
    runServer: () => {
       gulp.watch('source/*.html',           gulp.parallel('build-html'));
       gulp.watch('source/includes/**/*',    gulp.parallel('build-html'));
-      gulp.watch('source/javascripts/**/*', gulp.parallel('build-js'));
+      gulp.watch('source/js/**/*',          gulp.parallel('build-js'));
       gulp.watch('source/stylesheets/**/*', gulp.parallel('build-css'));
       gulp.watch('source/index.yml',        gulp.parallel('build-highlightjs', 'build-js', 'build-html'));
       const server = browserSync.create();
