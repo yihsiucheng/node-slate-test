@@ -63,9 +63,9 @@ html, body {
    overflow-x: hidden;
    position: fixed;
    z-index: 30;
-   top: 0;
-   left: 0;
-   bottom: 0;
+   top: 0px;
+   left: 0px;
+   bottom: 0px;
    width: $nav-width;
    background-color: $nav-bg;
    font-size: 13px;
@@ -87,15 +87,15 @@ html, body {
       position: relative;
       input {
          background: $nav-bg;
-         border-width: 0 0 1px 0;
+         border-width: 0px 0px 1px 0px;
          border-color: $search-box-border-color;
-         padding: 6px 0 6px 20px;
+         padding: 6px 0px 6px 20px;
          box-sizing: border-box;
          margin: $nav-v-padding $nav-padding;
          width: $nav-width - 30;
          outline: none;
          color: $nav-text;
-         border-radius: 0; /* ios has a default border radius */
+         border-radius: 0px;  //ios has a default border radius
          }
       &::before {
          position: absolute;
@@ -319,7 +319,7 @@ html, body {
       font-size: 30px;
       padding-top: 0.5em;
       padding-bottom: 0.5em;
-      border-bottom: 1px solid #ccc;
+      border-bottom: 1px solid lightgray;
       margin-bottom: $h1-margin-bottom;
       margin-top: 2em;
       border-top: 1px solid #ddd;
@@ -333,8 +333,8 @@ html, body {
       @extend %header-font;
       font-size: 20px;
       margin-top: 4em;
-      margin-bottom: 0;
-      border-top: 1px solid #ccc;
+      margin-bottom: 0px;
+      border-top: 1px solid lightgray;
       padding-top: 1.2em;
       padding-bottom: 1.2em;
       background-image: linear-gradient(to bottom, rgba(#fff, 0.4), rgba(#fff, 0));
@@ -355,7 +355,7 @@ html, body {
       font-size: 10px;
       }
    hr {
-      margin: 2em 0;
+      margin: 2em 0px;
       border-top: 2px solid $examples-bg;
       border-bottom: 2px solid $main-bg;
       }
@@ -369,20 +369,20 @@ html, body {
          }
       th {
          padding: 5px 10px;
-         border-bottom: 1px solid #ccc;
+         border-bottom: 1px solid lightgray;
          vertical-align: bottom;
          }
       td {
          padding: 10px;
          }
       tr:last-child {
-         border-bottom: 1px solid #ccc;
+         border-bottom: 1px solid lightgray;
          }
       tr:nth-child(odd)>td {
-         background-color: lighten($main-bg,4.2%);
+         background-color: lighten($main-bg, 4.2%);
          }
       tr:nth-child(even)>td {
-         background-color: lighten($main-bg,2.4%);
+         background-color: lighten($main-bg, 2.4%);
          }
       }
    dt {
@@ -393,13 +393,13 @@ html, body {
       }
    p, li, dt, dd {
       line-height: 1.6;
-      margin-top: 0;
+      margin-top: 0px;
       }
    img {
       max-width: 100%;
       }
    code {
-      background-color: rgba(0,0,0,0.05);
+      background-color: rgba(0, 0, 0, 0.05);
       padding: 3px;
       border-radius: 3px;
       @extend %break-words;
@@ -413,7 +413,7 @@ html, body {
       @extend %icon-info-sign;
       padding-top: 1em;
       padding-bottom: 1em;
-      text-shadow: 0 1px 0 lighten($aside-notice-bg, 15%);
+      text-shadow: 0px 1px 0px lighten($aside-notice-bg, 15%);
       margin-top: 1.5em;
       margin-bottom: 1.5em;
       background: $aside-notice-bg;
@@ -421,17 +421,17 @@ html, body {
       &.success {
          @extend %icon-ok-sign;
          background-color: $aside-success-bg;
-         text-shadow: 0 1px 0 lighten($aside-success-bg, 15%);
+         text-shadow: 0px 1px 0px lighten($aside-success-bg, 15%);
          }
       &.warning {
          @extend %icon-exclamation-sign;
          background-color: $aside-warning-bg;
-         text-shadow: 0 1px 0 lighten($aside-warning-bg, 15%);
+         text-shadow: 0px 1px 0px lighten($aside-warning-bg, 15%);
          }
       &.error {
          @extend %icon-exclamation-sign;
          background-color: $aside-error-bg;
-         text-shadow: 0 1px 0 lighten($aside-error-bg, 15%);
+         text-shadow: 0px 1px 0px lighten($aside-error-bg, 15%);
          }
       }
    .search-highlight {
@@ -453,18 +453,18 @@ html, body {
       background-color: $code-bg;
       color: white;
       padding: 2em $main-padding;
-      margin: 0;
+      margin: 0px;
       width: $examples-width;
       float:right;
       clear:right;
       box-sizing: border-box;
-      text-shadow: 0px 1px 2px rgba(0,0,0,0.4);
+      text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.4);
       @extend %right-col;
-      &>p { margin: 0; }
+      &>p { margin: 0px; }
       a {
          color: white;
          text-decoration: none;
-         border-bottom: dashed 1px #ccc;
+         border-bottom: dashed 1px lightgray;
          }
       }
    pre {
@@ -475,7 +475,7 @@ html, body {
          background-color: $code-annotation-bg;
          border-radius: 5px;
          padding: $code-annotation-padding;
-         color: #ccc;
+         color: lightgray;
          border-top: 1px solid black;
          border-bottom: 1px solid #404040;
          }
