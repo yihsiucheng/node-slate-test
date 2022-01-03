@@ -76,7 +76,7 @@ const getPageData = () => {
       javascript_include_tag: (name) =>
          `<script src=js/${name}.js></script>\n`,
       stylesheet_link_tag: (name, media) =>
-         `<link href=stylesheets/${name}.css rel=stylesheet media=${media}>`,
+         `<link href=css/${name}.css rel=stylesheet media=${media}>`,
       langs: (config.language_tabs || []).map(
          lang => typeof lang === 'string' ? lang : lang.keys.first),
       };
@@ -106,11 +106,11 @@ const task = {
          .pipe(gulp.dest('build/js'));
       },
    buildCss: () => {
-      return gulp.src('source/stylesheets/*.css.scss')
+      return gulp.src('source/css/*.css.scss')
          .pipe(sass().on('error', sass.logError))
          .pipe(rename({ extname: '' }))
          .pipe(gulpIf(settings.compress, cleanCss()))
-         .pipe(gulp.dest('build/stylesheets'));
+         .pipe(gulp.dest('build/css'));
       },
    addHighlightStyle: () => {
       const config = readIndexYml();
@@ -118,7 +118,7 @@ const task = {
       return gulp.src(cssPath)
          .pipe(rename({ prefix: 'highlight-' }))
          .pipe(gulpIf(settings.compress, cleanCss()))
-         .pipe(gulp.dest('build/stylesheets'));
+         .pipe(gulp.dest('build/css'));
       },
    buildHtml: () => {
       const data = getPageData();
@@ -145,7 +145,7 @@ const task = {
       gulp.watch('source/*.html',           gulp.parallel('build-html'));
       gulp.watch('source/includes/**/*',    gulp.parallel('build-html'));
       gulp.watch('source/js/**/*',          gulp.parallel('build-js'));
-      gulp.watch('source/stylesheets/**/*', gulp.parallel('build-css'));
+      gulp.watch('source/css/**/*', gulp.parallel('build-css'));
       gulp.watch('source/index.yml',        gulp.parallel('build-highlightjs', 'build-js', 'build-html'));
       const server = browserSync.create();
       server.init({
