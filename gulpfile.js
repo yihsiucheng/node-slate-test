@@ -14,6 +14,7 @@ import mergeStream  from 'merge-stream';
 import path         from 'path';
 import prettify     from 'gulp-prettify';
 import rename       from 'gulp-rename';
+import RevAll       from 'gulp-rev-all';
 import sassCompiler from 'sass';
 import sassPlugin   from 'gulp-sass';
 import uglify       from 'gulp-uglify';
@@ -140,6 +141,11 @@ const task = {
          task.buildHtml(),
          );
       },
+   hashWebApp() {
+      return gulp.src('build/2-minified/**/*')
+         .pipe(RevAll.revision({ dontRenameFile: ['.html'] }))
+         .pipe(gulp.dest('build/3-rev'))
+      },
    runServer: () => {
       gulp.watch('source/*.html',        gulp.parallel('build-html'));
       gulp.watch('source/includes/**/*', gulp.parallel('build-html'));
@@ -158,9 +164,10 @@ const task = {
       gulp.watch('build/1-dev/**/*').on('change', server.reload);
       },
    showPaths: () => {
-      console.log('Source input (markdown):', chalk.green(path.resolve('source')));
-      console.log('Regular output (HTML):  ', chalk.white(path.resolve('build/1-dev')));
-      console.log('Minified output (HTML): ', chalk.white(path.resolve('build/2-minified')));
+      console.log('Source input (markdown):  ', chalk.green(path.resolve('source')));
+      console.log('Regular output (HTML):    ', chalk.white(path.resolve('build/1-dev')));
+      console.log('Minified output (HTML):   ', chalk.white(path.resolve('build/2-minified')));
+      console.log('Revisioned output (HTML): ', chalk.white(path.resolve('build/3-rev')));
       return gulp.src('source/*.html');
       },
    publishToDocs: () => {
@@ -178,6 +185,7 @@ gulp.task('build-css',         task.buildCss);
 gulp.task('build-html',        task.buildHtml);
 gulp.task('build-highlightjs', task.addHighlightStyle);
 gulp.task('build',             task.build);
+gulp.task('revision',          task.hashWebApp);
 gulp.task('serve',             task.runServer);
 gulp.task('show-paths',        task.showPaths);
 gulp.task('publish',           task.publishToDocs);
