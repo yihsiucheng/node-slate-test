@@ -8,7 +8,7 @@
 
 banner="node-slate"
 projectHome=$(cd $(dirname $0); pwd)
-webPage=build/index.html
+webPage=build/1-dev/index.html
 
 setupTools() {
    # Check for Node.js installation and download project dependencies

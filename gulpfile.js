@@ -7,7 +7,6 @@ import cleanCss     from 'gulp-clean-css';
 import concat       from 'gulp-concat';
 import ejs          from 'gulp-ejs';
 import gulp         from 'gulp';
-import gulpIf       from 'gulp-if';
 import highlight    from 'highlight.js';
 import jsHint       from 'gulp-jshint';
 import log          from 'fancy-log';
@@ -30,9 +29,6 @@ const jsHintConfig = {
    browser: true,
    undef:   true,
    unused:  true,
-   };
-const settings = {
-   compress: true,
    };
 const jsFiles = {
    libs: [
@@ -83,10 +79,6 @@ const getPageData = () => {
       };
    return getPageData;
    };
-const showPaths = () => {
-   console.log('Source input (markdown):', chalk.green(path.resolve('source')));
-   console.log('Build output (HTML):    ', chalk.white(path.resolve('build')));
-   };
 
 // Tasks
 const task = {
@@ -97,40 +89,46 @@ const task = {
       },
    buildFonts: () => {
       return gulp.src('source/fonts/**/*.+(ttf|woff|woff2)')
-         .pipe(gulp.dest('build/fonts'));
+         .pipe(gulp.dest('build/1-dev/fonts'))
+         .pipe(gulp.dest('build/2-minified/fonts'));
       },
    buildImages: () => {
       return gulp.src('source/images/**/*')
-         .pipe(gulp.dest('build/images'));
+         .pipe(gulp.dest('build/1-dev/images'))
+         .pipe(gulp.dest('build/2-minified/images'));
       },
    buildJs: () => {
       const config = readIndexYml();
       return gulp.src(jsFiles.libs.concat(config.search ? jsFiles.search : [], jsFiles.scripts))
          .pipe(concat('all.js'))
-         .pipe(gulpIf(settings.compress, uglify()))
-         .pipe(gulp.dest('build/js'));
+         .pipe(gulp.dest('build/1-dev/js'))
+         .pipe(uglify())
+         .pipe(gulp.dest('build/2-minified/js'));
       },
    buildCss: () => {
       return gulp.src('source/css/*.css.scss')
          .pipe(sass().on('error', sass.logError))
          .pipe(rename({ extname: '' }))
-         .pipe(gulpIf(settings.compress, cleanCss()))
-         .pipe(gulp.dest('build/css'));
+         .pipe(gulp.dest('build/1-dev/css'))
+         .pipe(cleanCss())
+         .pipe(gulp.dest('build/2-minified/css'));
       },
    addHighlightStyle: () => {
       const config = readIndexYml();
       const cssPath = 'node_modules/highlight.js/styles/' + config.highlight_theme + '.css';
       return gulp.src(cssPath)
          .pipe(rename({ prefix: 'highlight-' }))
-         .pipe(gulpIf(settings.compress, cleanCss()))
-         .pipe(gulp.dest('build/css'));
+         .pipe(gulp.dest('build/1-dev/css'))
+         .pipe(cleanCss())
+         .pipe(gulp.dest('build/2-minified/css'));
       },
    buildHtml: () => {
       const data = getPageData();
       return gulp.src('source/*.html')
          .pipe(ejs(data).on('error', log.error))
-         .pipe(gulpIf(settings.compress, prettify({ indent_size: 3 })))
-         .pipe(gulp.dest('build'));
+         .pipe(gulp.dest('build/1-dev'))
+         .pipe(prettify({ indent_size: 3 }))
+         .pipe(gulp.dest('build/2-minified'));
       },
    build: () => {
       return mergeStream(
@@ -141,10 +139,6 @@ const task = {
          task.addHighlightStyle(),
          task.buildHtml(),
          );
-      },
-   buildUncompressed: () => {
-      settings.compress = false;
-      return task.build();
       },
    runServer: () => {
       gulp.watch('source/*.html',        gulp.parallel('build-html'));
@@ -159,31 +153,31 @@ const task = {
          listen:    'localhost',
          port:      port,
          server:    { baseDir: '.' },
-         startPath: 'build',
+         startPath: 'build/1-dev',
          });
-      gulp.watch('build/**/*').on('change', server.reload);
-      showPaths();
+      gulp.watch('build/1-dev/**/*').on('change', server.reload);
       },
    showPaths: () => {
-      showPaths();
+      console.log('Source input (markdown):', chalk.green(path.resolve('source')));
+      console.log('Regular output (HTML):  ', chalk.white(path.resolve('build/1-dev')));
+      console.log('Minified output (HTML): ', chalk.white(path.resolve('build/2-minified')));
       return gulp.src('source/*.html');
       },
    publishToDocs: () => {
       // mkdirSync('docs');
       writeFileSync('docs/CNAME', 'node-slate.js.org\n');
-      return gulp.src('build/**/*')
+      return gulp.src('build/2-minified/**/*')
          .pipe(gulp.dest('docs'));
       },
    };
 
 // Gulp
-gulp.task('lint',               task.runStaticAnalysis);
-gulp.task('build-js',           task.buildJs);
-gulp.task('build-css',          task.buildCss);
-gulp.task('build-html',         task.buildHtml);
-gulp.task('build-highlightjs',  task.addHighlightStyle);
-gulp.task('build-static-site',  task.build);
-gulp.task('build-uncompressed', task.buildUncompressed);
-gulp.task('serve',              task.runServer);
-gulp.task('show-paths',         task.showPaths);
-gulp.task('publish',            task.publishToDocs);
+gulp.task('lint',              task.runStaticAnalysis);
+gulp.task('build-js',          task.buildJs);
+gulp.task('build-css',         task.buildCss);
+gulp.task('build-html',        task.buildHtml);
+gulp.task('build-highlightjs', task.addHighlightStyle);
+gulp.task('build',             task.build);
+gulp.task('serve',             task.runServer);
+gulp.task('show-paths',        task.showPaths);
+gulp.task('publish',           task.publishToDocs);
