@@ -52,6 +52,7 @@
       "gulp-rename": "~2.0",
       "gulp-rev-all": "~3.0",
       "gulp-sass": "~5.1",
+      "gulp-size": "~4.0",
       "gulp-uglify": "~3.0",
       "highlight.js": "~11.4",
       "imagesloaded": "~5.0",

@@ -17,6 +17,7 @@ import rename       from 'gulp-rename';
 import RevAll       from 'gulp-rev-all';
 import sassCompiler from 'sass';
 import sassPlugin   from 'gulp-sass';
+import size         from 'gulp-size';
 import uglify       from 'gulp-uglify';
 import yaml         from 'js-yaml';
 import { marked } from 'marked';
@@ -144,7 +145,8 @@ const task = {
    hashWebApp() {
       return gulp.src('build/2-minified/**/*')
          .pipe(RevAll.revision({ dontRenameFile: ['.html'] }))
-         .pipe(gulp.dest('build/3-rev'));
+         .pipe(gulp.dest('build/3-rev'))
+         .pipe(size({ showFiles: true }));
       },
    runServer() {
       gulp.watch('source/*.html',        gulp.parallel('build-html'));
