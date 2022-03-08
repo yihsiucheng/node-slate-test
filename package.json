@@ -31,11 +31,12 @@
       "start": "    gulp serve",
       "prebuild": " rimraf build **/.DS_Store",
       "build": "    gulp build-static-site",
-      "postbuild": "gulp lint && w3c-html-validator build/index.html && gulp publish",
+      "postbuild": "gulp lint && w3c-html-validator build && gulp show-paths",
       "deploy": "   deploy.sh"
    },
    "dependencies": {
       "browser-sync": "~2.27",
+      "chalk": "~5.0",
       "fuse.js": "~6.5",
       "gulp": "~4.0",
       "gulp-clean-css": "~4.3",

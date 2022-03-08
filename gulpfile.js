@@ -2,6 +2,7 @@
 
 // Imports
 import browserSync  from 'browser-sync';
+import chalk        from 'chalk';
 import cleanCss     from 'gulp-clean-css';
 import concat       from 'gulp-concat';
 import ejs          from 'gulp-ejs';
@@ -82,6 +83,10 @@ const getPageData = () => {
       };
    return getPageData;
    };
+const showPaths = () => {
+   console.log('Source input (markdown):', chalk.green(path.resolve('source')));
+   console.log('Build output (HTML):    ', chalk.white(path.resolve('build')));
+   };
 
 // Tasks
 const task = {
@@ -142,11 +147,11 @@ const task = {
       return task.build();
       },
    runServer: () => {
-      gulp.watch('source/*.html',           gulp.parallel('build-html'));
-      gulp.watch('source/includes/**/*',    gulp.parallel('build-html'));
-      gulp.watch('source/js/**/*',          gulp.parallel('build-js'));
-      gulp.watch('source/css/**/*', gulp.parallel('build-css'));
-      gulp.watch('source/index.yml',        gulp.parallel('build-highlightjs', 'build-js', 'build-html'));
+      gulp.watch('source/*.html',        gulp.parallel('build-html'));
+      gulp.watch('source/includes/**/*', gulp.parallel('build-html'));
+      gulp.watch('source/js/**/*',       gulp.parallel('build-js'));
+      gulp.watch('source/css/**/*',      gulp.parallel('build-css'));
+      gulp.watch('source/index.yml',     gulp.parallel('build-highlightjs', 'build-js', 'build-html'));
       const server = browserSync.create();
       server.init({
          open:      true,
@@ -157,8 +162,11 @@ const task = {
          startPath: 'build',
          });
       gulp.watch('build/**/*').on('change', server.reload);
-      console.log('Slate markdown source:');
-      console.log(path.resolve('source'));
+      showPaths();
+      },
+   showPaths: () => {
+      showPaths();
+      return gulp.src('source/*.html');
       },
    publishToDocs: () => {
       // mkdirSync('docs');
@@ -177,4 +185,5 @@ gulp.task('build-highlightjs',  task.addHighlightStyle);
 gulp.task('build-static-site',  task.build);
 gulp.task('build-uncompressed', task.buildUncompressed);
 gulp.task('serve',              task.runServer);
+gulp.task('show-paths',         task.showPaths);
 gulp.task('publish',            task.publishToDocs);

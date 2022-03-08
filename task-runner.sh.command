@@ -79,6 +79,7 @@ runTasks() {
    echo "Tasks:"
    npm test
    npm run build
+   npx gulp publish
    echo
    }
 
