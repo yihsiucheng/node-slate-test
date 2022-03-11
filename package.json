@@ -32,8 +32,8 @@
       "step:03": "gulp lint",
       "step:04": "w3c-html-validator build/1-dev",
       "step:05": "gulp revision",
-      "step:06": "gulp show-paths",
-      "build": "npm-run-all step:*",
+      "build": "npm-run-all step:* && gulp show-paths",
+      "build-quiet": "npm-run-all step:*",
       "start": "npm run build && gulp serve",
       "deploy": "deploy.sh"
    },
