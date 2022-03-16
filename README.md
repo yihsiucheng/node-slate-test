@@ -90,4 +90,10 @@ npm run deploy
 Gulp Task
 ---------
 
-Slate API documentation generation is available as Gulp task with the [gulp-node-slate](https://github.com/center-key/gulp-node-slate) plugin.
+Slate API documentation generation is also available as a Gulp task with the
+[gulp-node-slate](https://github.com/center-key/gulp-node-slate) plugin.
+
+<br>
+
+---
+[MIT License](LICENSE.txt)

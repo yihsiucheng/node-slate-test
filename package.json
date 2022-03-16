@@ -1,6 +1,6 @@
 {
    "name": "node-slate",
-   "version": "3.0.1",
+   "version": "3.0.2",
    "description": "Node port of lord/slate",
    "license": "Apache-2.0",
    "type": "module",
@@ -54,7 +54,7 @@
       "gulp-sass": "~5.1",
       "gulp-size": "~4.0",
       "gulp-uglify": "~3.0",
-      "highlight.js": "~11.4",
+      "highlight.js": "~11.5",
       "imagesloaded": "~5.0",
       "jquery": "~3.6",
       "jquery-highlight": "~3.5",
