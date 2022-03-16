@@ -92,12 +92,12 @@ const task = {
    buildFonts() {
       return gulp.src('source/fonts/**/*.+(ttf|woff|woff2)')
          .pipe(gulp.dest('build/1-dev/fonts'))
-         .pipe(gulp.dest('build/2-minified/fonts'));
+         .pipe(gulp.dest('build/2-min/fonts'));
       },
    buildImages() {
       return gulp.src('source/images/**/*')
          .pipe(gulp.dest('build/1-dev/images'))
-         .pipe(gulp.dest('build/2-minified/images'));
+         .pipe(gulp.dest('build/2-min/images'));
       },
    buildJs() {
       const config = readIndexYml();
@@ -105,7 +105,7 @@ const task = {
          .pipe(concat('all.js'))
          .pipe(gulp.dest('build/1-dev/js'))
          .pipe(uglify())
-         .pipe(gulp.dest('build/2-minified/js'));
+         .pipe(gulp.dest('build/2-min/js'));
       },
    buildCss() {
       return gulp.src('source/css/*.css.scss')
@@ -113,7 +113,7 @@ const task = {
          .pipe(rename({ extname: '' }))
          .pipe(gulp.dest('build/1-dev/css'))
          .pipe(cleanCss())
-         .pipe(gulp.dest('build/2-minified/css'));
+         .pipe(gulp.dest('build/2-min/css'));
       },
    addHighlightStyle() {
       const config = readIndexYml();
@@ -122,7 +122,7 @@ const task = {
          .pipe(rename({ prefix: 'highlight-' }))
          .pipe(gulp.dest('build/1-dev/css'))
          .pipe(cleanCss())
-         .pipe(gulp.dest('build/2-minified/css'));
+         .pipe(gulp.dest('build/2-min/css'));
       },
    buildHtml() {
       const data = getPageData();
@@ -130,7 +130,7 @@ const task = {
          .pipe(ejs(data).on('error', log.error))
          .pipe(gulp.dest('build/1-dev'))
          .pipe(prettify({ indent_size: 3 }))
-         .pipe(gulp.dest('build/2-minified'));
+         .pipe(gulp.dest('build/2-min'));
       },
    build() {
       return mergeStream(
@@ -143,7 +143,7 @@ const task = {
          );
       },
    hashWebApp() {
-      return gulp.src('build/2-minified/**/*')
+      return gulp.src('build/2-min/**/*')
          .pipe(RevAll.revision({ dontRenameFile: ['.html'] }))
          .pipe(gulp.dest('build/3-rev'))
          .pipe(size({ showFiles: true }));
@@ -168,14 +168,14 @@ const task = {
    showPaths() {
       console.log('Source input (markdown):  ', chalk.green(path.resolve('source')));
       console.log('Regular output (HTML):    ', chalk.white(path.resolve('build/1-dev')));
-      console.log('Minified output (HTML):   ', chalk.white(path.resolve('build/2-minified')));
+      console.log('Minified output (HTML):   ', chalk.white(path.resolve('build/2-min')));
       console.log('Revisioned output (HTML): ', chalk.white(path.resolve('build/3-rev')));
       return gulp.src('source/*.html');
       },
    publishToDocs() {
       // mkdirSync('docs');
       writeFileSync('docs/CNAME', 'node-slate.js.org\n');
-      return gulp.src('build/2-minified/**/*')
+      return gulp.src('build/2-min/**/*')
          .pipe(gulp.dest('docs'));
       },
    };
