@@ -169,7 +169,7 @@ const task = {
       console.log('Source input (markdown):  ', chalk.green(path.resolve('source')));
       console.log('Regular output (HTML):    ', chalk.white(path.resolve('build/1-dev')));
       console.log('Minified output (HTML):   ', chalk.white(path.resolve('build/2-min')));
-      console.log('Revisioned output (HTML): ', chalk.white(path.resolve('build/3-rev')));
+      console.log('Production output (HTML): ', chalk.white(path.resolve('build/3-rev')));
       return gulp.src('source/*.html');
       },
    publishToDocs() {
