@@ -14,10 +14,8 @@ import mergeStream  from 'merge-stream';
 import path         from 'path';
 import prettify     from 'gulp-prettify';
 import rename       from 'gulp-rename';
-import RevAll       from 'gulp-rev-all';
 import sassCompiler from 'sass';
 import sassPlugin   from 'gulp-sass';
-import size         from 'gulp-size';
 import uglify       from 'gulp-uglify';
 import yaml         from 'js-yaml';
 import { marked } from 'marked';
@@ -58,12 +56,12 @@ renderer.code = (code, language) => {
       highlight.highlightAuto(code).value;
    return `<pre class="highlight ${language}"><code>${highlighted}</code></pre>`;
    };
-const readIndexYml = () => yaml.load(readFileSync('source/index.yml', 'utf8'));
+const readIndexYml = () => yaml.load(readFileSync('source/index.yml', 'utf-8'));
 const getPageData = () => {
    const config = readIndexYml();
    const includes = config.includes
       .map(include => `source/includes/${include}.md`)
-      .map(include => readFileSync(include, 'utf8'))
+      .map(include => readFileSync(include, 'utf-8'))
       .map(include => marked(include, { renderer: renderer }));
    const code = (filename) => filename.split('.')[0];
    const getPageData = {
@@ -142,12 +140,6 @@ const task = {
          task.buildHtml(),
          );
       },
-   hashWebApp() {
-      return gulp.src('build/2-min/**/*')
-         .pipe(RevAll.revision({ dontRenameFile: ['.html'] }))
-         .pipe(gulp.dest('build/3-rev'))
-         .pipe(size({ showFiles: true }));
-      },
    runServer() {
       gulp.watch('source/*.html',        gulp.parallel('build-html'));
       gulp.watch('source/includes/**/*', gulp.parallel('build-html'));
@@ -187,7 +179,6 @@ gulp.task('build-css',         task.buildCss);
 gulp.task('build-html',        task.buildHtml);
 gulp.task('build-highlightjs', task.addHighlightStyle);
 gulp.task('build',             task.build);
-gulp.task('revision',          task.hashWebApp);
 gulp.task('serve',             task.runServer);
 gulp.task('show-paths',        task.showPaths);
 gulp.task('publish',           task.publishToDocs);
