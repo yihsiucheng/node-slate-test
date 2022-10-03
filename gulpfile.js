@@ -1,11 +1,13 @@
 // node-slate
 
 // Imports
+import { marked }   from 'marked';
 import browserSync  from 'browser-sync';
 import chalk        from 'chalk';
 import cleanCss     from 'gulp-clean-css';
 import concat       from 'gulp-concat';
 import ejs          from 'gulp-ejs';
+import fs           from 'fs';
 import gulp         from 'gulp';
 import highlight    from 'highlight.js';
 import jsHint       from 'gulp-jshint';
@@ -18,8 +20,6 @@ import sassCompiler from 'sass';
 import sassPlugin   from 'gulp-sass';
 import uglify       from 'gulp-uglify';
 import yaml         from 'js-yaml';
-import { marked } from 'marked';
-import { readFileSync, writeFileSync } from 'fs';
 
 // Setup
 const port = 4567;
@@ -56,12 +56,12 @@ renderer.code = (code, language) => {
       highlight.highlightAuto(code).value;
    return `<pre class="highlight ${language}"><code>${highlighted}</code></pre>`;
    };
-const readIndexYml = () => yaml.load(readFileSync('source/index.yml', 'utf-8'));
+const readIndexYml = () => yaml.load(fs.readFileSync('source/index.yml', 'utf-8'));
 const getPageData = () => {
    const config = readIndexYml();
    const includes = config.includes
       .map(include => `source/includes/${include}.md`)
-      .map(include => readFileSync(include, 'utf-8'))
+      .map(include => fs.readFileSync(include, 'utf-8'))
       .map(include => marked(include, { renderer: renderer }));
    const code = (filename) => filename.split('.')[0];
    const getPageData = {
@@ -165,8 +165,8 @@ const task = {
       return gulp.src('source/*.html');
       },
    publishToDocs() {
-      // mkdirSync('docs');
-      writeFileSync('docs/CNAME', 'node-slate.js.org\n');
+      fs.mkdirSync('docs', { recursive: true });
+      fs.writeFileSync('docs/CNAME', 'node-slate.js.org\n');
       return gulp.src('build/2-min/**/*')
          .pipe(gulp.dest('docs'));
       },

@@ -65,7 +65,7 @@
       "marked": "~4.1",
       "merge-stream": "~2.0",
       "npm-run-all2": "~6.0",
-      "rev-web-assets": "~0.0",
+      "rev-web-assets": "~0.1",
       "rimraf": "~3.0",
       "sass": "~1.55",
       "tocbot": "~4.18",
