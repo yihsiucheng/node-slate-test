@@ -27,7 +27,7 @@
    },
    "runScriptsConfig": {
       "build": [
-         "rimraf build **/.DS_Store",
+         "rimraf build",
          "gulp build",
          "gulp lint",
          "html-validator build/1-dev",
@@ -48,7 +48,7 @@
       "test": "jshint gulpfile.js"
    },
    "dependencies": {
-      "browser-sync": "~2.27",
+      "browser-sync": "~2.29",
       "chalk": "~5.2",
       "fuse.js": "~6.6",
       "gulp": "~4.0",
@@ -72,13 +72,13 @@
       "jquery.tocify": "~1.9",
       "js-yaml": "~4.1",
       "jshint": "~2.13",
-      "marked": "~4.2",
+      "marked": "~4.3",
       "merge-stream": "~2.0",
       "rev-web-assets": "~1.0",
-      "rimraf": "3",
-      "run-scripts-util": "~1.0",
-      "sass": "~1.58",
-      "tocbot": "~4.20",
+      "rimraf": "~5.0",
+      "run-scripts-util": "~1.1",
+      "sass": "~1.62",
+      "tocbot": "~4.21",
       "w3c-html-validator": "~1.3"
    }
 }
