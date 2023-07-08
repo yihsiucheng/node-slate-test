@@ -62,7 +62,7 @@ const getPageData = () => {
    const includes = config.includes
       .map(include => `source/includes/${include}.md`)
       .map(include => fs.readFileSync(include, 'utf-8'))
-      .map(include => marked(include, { renderer: renderer }));
+      .map(include => marked(include, { renderer: renderer, mangle: false, headerIds: false }));
    const code = (filename) => filename.split('.')[0];
    const getPageData = {
       current_page: { data: config },
