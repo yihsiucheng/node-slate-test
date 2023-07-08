@@ -21,7 +21,6 @@
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/center-key/node-slate/blob/main/LICENSE.txt)
 [![npm](https://img.shields.io/npm/v/node-slate.svg)](https://www.npmjs.com/package/node-slate)
-[![Vulnerabilities](https://snyk.io/test/github/center-key/node-slate/badge.svg)](https://snyk.io/test/github/center-key/node-slate)
 [![Build](https://github.com/center-key/node-slate/workflows/build/badge.svg)](https://github.com/center-key/node-slate/actions/workflows/run-spec-on-push.yaml)
 
 Features

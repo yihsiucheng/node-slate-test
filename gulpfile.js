@@ -2,6 +2,7 @@
 
 // Imports
 import { marked }   from 'marked';
+// import { gfmHeadingId } from "marked-gfm-heading-id";
 import browserSync  from 'browser-sync';
 import chalk        from 'chalk';
 import cleanCss     from 'gulp-clean-css';
@@ -62,7 +63,7 @@ const getPageData = () => {
    const includes = config.includes
       .map(include => `source/includes/${include}.md`)
       .map(include => fs.readFileSync(include, 'utf-8'))
-      .map(include => marked(include, { renderer: renderer, mangle: false, headerIds: false }));
+      .map(include => marked(include, { renderer: renderer, mangle: false }));
    const code = (filename) => filename.split('.')[0];
    const getPageData = {
       current_page: { data: config },
