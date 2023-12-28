@@ -1,8 +1,9 @@
 // node-slate
 
 // Imports
-import { marked }   from 'marked';
-// import { gfmHeadingId } from "marked-gfm-heading-id";
+import { gfmHeadingId } from 'marked-gfm-heading-id';
+import { marked } from 'marked';
+import { markedHighlight } from 'marked-highlight';
 import browserSync  from 'browser-sync';
 import chalk        from 'chalk';
 import cleanCss     from 'gulp-clean-css';
@@ -10,7 +11,7 @@ import concat       from 'gulp-concat';
 import ejs          from 'gulp-ejs';
 import fs           from 'fs';
 import gulp         from 'gulp';
-import highlight    from 'highlight.js';
+import hljs         from 'highlight.js';
 import jsHint       from 'gulp-jshint';
 import log          from 'fancy-log';
 import mergeStream  from 'merge-stream';
@@ -51,19 +52,21 @@ const jsFiles = {
    };
 
 // Helper functions
-const renderer = new marked.Renderer();
-renderer.code = (code, language) => {
-   const highlighted = language ? highlight.highlight(code, { language: language }).value :
-      highlight.highlightAuto(code).value;
-   return `<pre class="highlight ${language}"><code>${highlighted}</code></pre>`;
-   };
 const readIndexYml = () => yaml.load(fs.readFileSync('source/index.yml', 'utf-8'));
+const highlightOptions = {
+   langPrefix: 'hljs language-',
+   highlight(code, lang) {
+      const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+      return hljs.highlight(code, { language }).value;
+      },
+   };
+marked.use(gfmHeadingId(), markedHighlight(highlightOptions));
 const getPageData = () => {
    const config = readIndexYml();
    const includes = config.includes
       .map(include => `source/includes/${include}.md`)
       .map(include => fs.readFileSync(include, 'utf-8'))
-      .map(include => marked(include, { renderer: renderer, mangle: false }));
+      .map(include => marked(include));
    const code = (filename) => filename.split('.')[0];
    const getPageData = {
       current_page: { data: config },

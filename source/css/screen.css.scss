@@ -403,9 +403,9 @@ html, body {
       @extend %break-words;
       @extend %code-font;
       }
-   pre>code {
+   pre>code.hljs {
       background-color: transparent;
-      padding: 0;
+      padding: 0px;
       }
    aside {
       @extend %icon-info-sign;

@@ -25,12 +25,9 @@ under the License.
       if (language === '') return;
       $('.lang-selector a').removeClass('active');
       $('.lang-selector a[data-language-name=' + language + ']').addClass('active');
-      for (var i=0; i < languages.length; i++) {
-         $('.highlight.' + languages[i]).hide();
-         $('.lang-specific.' + languages[i]).hide();
-         }
-      $('.highlight.' + language).show();
-      $('.lang-specific.' + language).show();
+      for (var i=0; i < languages.length; i++)
+         $('.hljs.language-' + languages[i]).parent().hide();
+      $('.hljs.language-' + language).parent().show();
       global.toc.calculateHeights();
       if ($(window.location.hash).get(0))  //scroll to the new location of the position
          $(window.location.hash).get(0).scrollIntoView(true);
