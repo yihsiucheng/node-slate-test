@@ -26,7 +26,7 @@
 Features
 --------
 
-* **Clean, intuitive design** — With Slate, the description of your API is on the left side of your documentation, and all the code examples are on the right side. Inspired by [Stripe's](https://stripe.com/docs/api) and [Paypal's](https://developer.paypal.com/docs/api/overview) API docs. Slate is responsive, so it looks great on tablets, phones, and even in print.
+* **Clean, intuitive design** — With Slate, the description of your API is on the left side of your documentation, and all the code examples are on the right side. Inspired by [Stripe's](https://stripe.com/docs/api) and [PayPal's](https://developer.paypal.com/docs/api/overview) API docs. Slate is responsive, so it looks great on tablets, phones, and even in print.
 
 * **Everything on a single page** — Gone are the days when your users had to search through a million pages to find what they wanted. Slate puts the entire documentation on a single page. We haven't sacrificed linkability, though. As you scroll, your browser's hash will update to the nearest header, so linking to a particular point in the documentation is still natural and easy.
 
@@ -85,12 +85,6 @@ Publish your docs to `origin/gh-pages` branch:
 ```shell
 npm run deploy
 ```
-
-Gulp Task
----------
-
-Slate API documentation generation is also available as a Gulp task with the
-[gulp-node-slate](https://github.com/center-key/gulp-node-slate) plugin.
 
 <br>
 
