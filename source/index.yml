@@ -5,12 +5,14 @@ language_tabs:
    - ruby
    - python
    - javascript
+   - csharp
 
 toc_footers:
    - <a href=https://github.com/center-key/node-slate>node-slate on GitHub</a>
    - <a href=https://www.npmjs.com/package/node-slate>Documentation powered by Slate</a>
 
 includes:
+   - api_test
    - main
    - _errors
 

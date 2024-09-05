@@ -34,6 +34,17 @@ import { kittn } from 'kittn';
 const api = kittn.authorize('meowmeowmeow');
 ```
 
+```csharp
+public enum FileMode
+{
+    CreateNew = 1,
+    Create = 2,
+    Open = 3,
+    OpenOrCreate = 4,
+    Truncate = 5,
+    Append = 6,
+}
+```
 > Make sure to replace `meowmeowmeow` with your API key.
 
 Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](https://example.com/developers).
@@ -74,6 +85,17 @@ import { kittn } from 'kittn';
 
 const api = kittn.authorize('meowmeowmeow');
 const kittens = api.kittens.get();
+```
+
+```csharp
+public string GetName(int ID)
+{
+    if (ID < names.Length)
+        return names[ID];
+    else
+        return String.Empty;
+}
+private string[] names = ["Spencer", "Sally", "Doug"];
 ```
 
 > The above command returns JSON structured like this:
@@ -140,6 +162,19 @@ import { kittn } from 'kittn';
 
 const api = kittn.authorize('meowmeowmeow');
 const max = api.kittens.get(2);
+```
+
+```csharp
+public struct Coords
+{
+    public int x, y;
+
+    public Coords(int p1, int p2)
+    {
+        x = p1;
+        y = p2;
+    }
+}
 ```
 
 > The above command returns JSON structured like this:

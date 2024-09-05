@@ -18,7 +18,7 @@ import mergeStream  from 'merge-stream';
 import path         from 'path';
 import prettify     from 'gulp-prettify';
 import rename       from 'gulp-rename';
-import sassCompiler from 'sass';
+import * as sassCompiler from 'sass';
 import sassPlugin   from 'gulp-sass';
 import uglify       from 'gulp-uglify';
 import yaml         from 'js-yaml';
