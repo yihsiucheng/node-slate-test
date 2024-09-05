@@ -92,4 +92,4 @@ npm run deploy
 <br>
 
 ---
-[MIT License](./LICENSE.txt)
+[MIT License](LICENSE.txt)
