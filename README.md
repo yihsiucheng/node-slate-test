@@ -86,7 +86,10 @@ Publish your docs to `origin/gh-pages` branch:
 npm run deploy
 ```
 
+### Get Docs Export From Notion
+
+
 <br>
 
 ---
-[MIT License](LICENSE.txt)
+[MIT License](./LICENSE.txt)

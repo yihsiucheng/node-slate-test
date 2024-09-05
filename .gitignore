@@ -4,5 +4,7 @@
 /yarn.lock
 /build/
 
+
 # Extraneous system files
 .DS_Store
+.idea
